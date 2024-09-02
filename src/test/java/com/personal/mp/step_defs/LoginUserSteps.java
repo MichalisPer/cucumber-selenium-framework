@@ -1,28 +1,48 @@
 package com.personal.mp.step_defs;
 
+import com.personal.mp.page_objects.LoginPage;
+import com.personal.mp.utils.TestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 public class LoginUserSteps {
+
+    TestContext testContext;
+    LoginPage loginPage;
+
+    public LoginUserSteps(TestContext testContext) {
+        this.testContext = testContext;
+        this.loginPage = testContext.getPageObjectManager().getLoginPage();
+    }
+
     @Given("user is on the login page")
-    public void standard_user_is_on_the_login_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void userIsOnTheLoginPage() {
+        loginPage.navigateToSwagLabs();
     }
-    @When("they enter username {string} and password {string}")
-    public void they_enter_username_and_password(String username, String password) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @When("they login with username {} and password {}")
+    public void theyLoginWithUsernameAndPassword(String username, String password) {
+        loginPage.loginUser(username, password);
     }
-    @When("they click the login button")
-    public void they_click_the_login_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
+
     @Then("they should be redirected to the homepage")
-    public void they_should_be_redirected_to_the_homepage() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void theyShouldBeRedirectedToTheHomepage() {
+        Assert.assertEquals(testContext.getWebDriverManager().getDriver().getCurrentUrl(),
+                "https://www.saucedemo.com/inventory.html");
+        Assert.assertEquals(testContext.getWebDriverManager().getDriver().getTitle(),
+                "Swag Labs");
+    }
+
+    @Then("they should get a warning message")
+    public void theyShouldGetAWarningMessage() {
+        Assert.assertTrue(loginPage.getWait().until(
+                ExpectedConditions.
+                        textToBePresentInElementLocated(
+                                By.className("error-message-container"),
+                                "user has been locked out")));
     }
 }
