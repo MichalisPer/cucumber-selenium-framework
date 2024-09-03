@@ -15,5 +15,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'oracle'
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+      - name: Setup Firefox
+        uses: browser-actions/setup-firefox@v1
       - name: Run UI Tests
         run: mvn clean test
