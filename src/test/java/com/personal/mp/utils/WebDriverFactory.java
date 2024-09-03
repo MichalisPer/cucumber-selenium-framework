@@ -15,11 +15,29 @@ public class WebDriverFactory {
 
     public static WebDriver createWebDriver(String browser, String runMode) {
         switch (runMode.toLowerCase()) {
+            case "ci":
+                return createCIDriver(browser);
             case "grid":
                 return createGridDriver(browser);
             case "local":
             default:
                 return createLocalDriver(browser);
+        }
+    }
+
+    private static WebDriver createCIDriver(String browser) {
+        switch (browser.toLowerCase()) {
+            case "firefox":
+                return WebDriverManager.firefoxdriver()
+                        .capabilities(new FirefoxOptions()
+                                .addArguments("--headless"))
+                        .create();
+            case "chrome":
+            default:
+                return WebDriverManager.chromedriver()
+                        .capabilities(new ChromeOptions()
+                                .addArguments("--headless"))
+                        .create();
         }
     }
 
@@ -29,7 +47,7 @@ public class WebDriverFactory {
                 return WebDriverManager.firefoxdriver().create();
             case "chrome":
             default:
-                return WebDriverManager.chromedriver().capabilities(new ChromeOptions().addArguments("--headless")).create();
+                return WebDriverManager.chromedriver().create();
         }
     }
 
