@@ -11,7 +11,7 @@ import org.testng.Assert;
 
 public class LoginUserSteps {
 
-    TestContext testContext;
+     TestContext testContext;
     LoginPage loginPage;
 
     public LoginUserSteps(TestContext testContext) {
