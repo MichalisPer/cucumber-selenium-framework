@@ -1,11 +1,8 @@
 name: UI Tests
 on:
-  push:
-    branches:
-      - 'main'
   pull_request:
     branches:
-      - 'main'
+      - master
   workflow_dispatch:
 jobs:
   ui-tests:
@@ -17,5 +14,10 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
+          distribution: 'oracle'
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+      - name: Setup Firefox
+        uses: browser-actions/setup-firefox@v1
       - name: Run UI Tests
         run: mvn clean test

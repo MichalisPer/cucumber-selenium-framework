@@ -29,7 +29,7 @@ public class WebDriverFactory {
                 return WebDriverManager.firefoxdriver().create();
             case "chrome":
             default:
-                return WebDriverManager.chromedriver().create();
+                return WebDriverManager.chromedriver().capabilities(new ChromeOptions().addArguments("--headless")).create();
         }
     }
 
