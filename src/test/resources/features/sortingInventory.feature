@@ -9,3 +9,12 @@ Feature: Sorting Inventory
       | order      |  |
       | descending |  |
       | ascending  |  |
+
+  Scenario Outline: Sort products by name
+    Given "standard_user" is on the home page
+    When they select to sort products by name in <order> order
+    Then the products are sorted by name in <order> order
+    Examples:
+      | order      |  |
+      | descending |  |
+      | ascending  |  |

@@ -26,7 +26,7 @@ public class SortingSteps {
     }
 
     @When("they select to sort products by price in {} order")
-    public void theySelectToSortProductsInOrder(String order) {
+    public void theySelectToSortProductsByPriceInOrder(String order) {
         if (order.equals("ascending")) {
             homePage.selectSortOptionByText("Price (low to high)");
         } else if (order.equals("descending")) {
@@ -40,6 +40,24 @@ public class SortingSteps {
             Assert.assertTrue(homePage.arePricesSortedAscending());
         } else if (order.equals("descending")) {
             Assert.assertTrue(homePage.arePricesSortedDescending());
+        }
+    }
+
+    @When("they select to sort products by name in {} order")
+    public void theySelectToSortProductsByNameInOrder(String order) {
+        if (order.equals("ascending")) {
+            homePage.selectSortOptionByText("Name (A to Z)");
+        } else if (order.equals("descending")) {
+            homePage.selectSortOptionByText("Name (Z to A)");
+        }
+    }
+
+    @Then("the products are sorted by name in {} order")
+    public void theProductsAreSortedByNameInOrder(String order) {
+        if (order.equals("ascending")) {
+            Assert.assertTrue(homePage.areNamesSortedAscending());
+        } else if (order.equals("descending")) {
+            Assert.assertTrue(homePage.areNamesSortedDescending());
         }
     }
 }
