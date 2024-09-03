@@ -36,6 +36,11 @@ public class HomePage extends BasePage {
                 "inventory_item_price")).getText()).collect(Collectors.toList());
     }
 
+    private List<String> getProductNamesAsString() {
+        return products.stream().map(e -> e.findElement(By.className(
+                "inventory_item_name")).getText()).collect(Collectors.toList());
+    }
+
     private List<Double> getProductPricesAsDouble() {
         return getProductPricesAsString().stream()
                 .map(price -> Double.parseDouble(price.replace("$", "")))
@@ -54,5 +59,19 @@ public class HomePage extends BasePage {
         List<Double> sortedPrices = new ArrayList<>(productPrices);
         sortedPrices.sort(Collections.reverseOrder());
         return productPrices.equals(sortedPrices);
+    }
+
+    public boolean areNamesSortedAscending() {
+        List<String> productNames = getProductNamesAsString();
+        List<String> sortedNames = new ArrayList<>(productNames);
+        Collections.sort(sortedNames);
+        return productNames.equals(sortedNames);
+    }
+
+    public boolean areNamesSortedDescending() {
+        List<String> productNames = getProductNamesAsString();
+        List<String> sortedNames = new ArrayList<>(productNames);
+        sortedNames.sort(Collections.reverseOrder());
+        return productNames.equals(sortedNames);
     }
 }
