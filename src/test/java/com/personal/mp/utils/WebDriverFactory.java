@@ -1,5 +1,6 @@
 package com.personal.mp.utils;
 
+import com.personal.mp.config.FileReaderManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,7 +12,8 @@ import java.net.URL;
 
 public class WebDriverFactory {
 
-    static final String URL_GRID = System.getenv("GRID_URL");
+    static final String URL_GRID =
+            FileReaderManager.getInstance().getConfigFileReader().getSeleniumGridHubUrl();
 
     public static WebDriver createWebDriver(String browser, String runMode) {
         switch (runMode.toLowerCase()) {

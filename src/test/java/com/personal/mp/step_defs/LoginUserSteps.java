@@ -21,7 +21,7 @@ public class LoginUserSteps {
 
     @Given("user is on the login page")
     public void userIsOnTheLoginPage() {
-        loginPage.navigateToSwagLabs();
+        loginPage.navigateToApplication();
     }
 
     @When("they login with username {} and password {}")

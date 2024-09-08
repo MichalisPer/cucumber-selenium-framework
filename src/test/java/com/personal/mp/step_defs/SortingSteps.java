@@ -21,7 +21,7 @@ public class SortingSteps {
 
     @Given("{string} is on the home page")
     public void userIsOnTheHomePage(String username) {
-        loginPage.navigateToSwagLabs();
+        loginPage.navigateToApplication();
         loginPage.loginUser(username, "secret_sauce");
     }
 

@@ -1,5 +1,6 @@
 package com.personal.mp.page_objects;
 
+import com.personal.mp.config.FileReaderManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,8 +16,8 @@ public class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(40));
     }
 
-    public void navigateToSwagLabs() {
-        this.driver.get("https://www.saucedemo.com/");
+    public void navigateToApplication() {
+        this.driver.get(FileReaderManager.getInstance().getConfigFileReader().getApplicationUrl());
     }
 
     public WebDriverWait getWait() {
